@@ -1,0 +1,163 @@
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <script src='https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js'></script>
+        <link rel='stylesheet' href='https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css'>
+        <link rel='stylesheet' href='Film.css'>
+        <script src="./angular.min.js"></script>
+        <script src="Film.js"></script>
+          
+        
+    </head>
+    <body ng-app="GetRatingApp" ng-controller='GetRatingController'ng-init="dispMovie=true; ">
+            
+            <form ng-model="movieForm" ng-show="dispMovie" class="mt-5 card custom-card" >
+                <h1 class="p-5 text-center custom-heading">Film Rater</h1>
+                <div class="form-row">
+                    <div class="col-md-4 mb-3">
+                        <label>Film ID</label>
+                        <input type="number" class="form-control" placeholder="Film ID" ng-model="fID" required/>
+                    </div>
+                    <div class="col-md-4 mb=3"></div>
+                    <div class="col-md-4 mb=3"></div>
+                    
+                </div>
+
+                <div class="form-row">
+                    <div class="col-md-4 mb-3">
+                        <label>Film Name</label>
+                        <input type="text" class="form-control" placeholder="Film Name" ng-model="fName">
+                    </div>
+                    <div class="col-md-1 mb=3"></div>
+                    <div class="col-md-4 mb=3">
+                        <label>Genre</label>
+                        <select class="form-control" ng-model="fGenre">
+                                <option selected="selected" value="Thriller">Thriller</option>
+                                <option value="Drama">Drama</option>
+                                <option value="Comedy">Comedy</option>
+                                <option value="Action">Action</option>
+                                <option value="Fiction">Fiction</option>
+                                <option value="Romance">Romance</option>
+                        </select>
+                    </div>
+                    <div class="col-md-3 mb=3"></div>
+                </div>
+
+
+                <div class="form-row">
+                    <div class="col-md-4 mb-3">
+                        <label>Studio</label>
+                        <input type="text" class="form-control" placeholder="Studio" ng-model="fStudio">
+                    </div>
+                    <div class="col-md-1 mb=3"></div>
+
+                    <div class="col-md-4 mb=3">
+                        <label>Director</label>
+                        <input type="text" class="form-control" placeholder="Director"ng-model="fDirector">
+                    </div>
+                    <div class="col-md-3 mb=3"></div>
+                </div>
+
+                <div class="form-row">
+                    <div class="col-md-4 mb-3">
+                        <label>Producer</label>
+                        <input type="text" class="form-control" placeholder="Producer" ng-model="fProducer">
+                    </div>
+                    <div class="col-md-1 mb=3"></div>
+
+                    <div class="col-md-4 mb=3">
+                        <label>Lead Actor</label>
+                        <input type="text" class="form-control" placeholder="Lead Actor" ng-model="fLeadActor">
+                    </div>
+                    <div class="col-md-3 mb=3"></div>
+                </div>
+                <br><br>
+                
+                <div class="form-row">
+                    <div class="col-md-1 mb-3">
+
+                    </div>
+
+                    <div class="col-md-2 mb-3">
+                            <button class="btn btn-success" ng-click="addMovie()">Add Movie</button>
+                    </div>
+                    <div class="col-md-2 mb-3">
+                            <button class="btn btn-success" ng-click="updateMovie()">Update Movie</button>
+                    </div>
+                    <div class="col-md-2 mb-3">
+                            <button class="btn btn-success" ng-click="deleteMovie()">Delete Movie</button>
+                    </div>
+                    <div class="col-md-2 mb-3">
+                            <button class="btn btn-success" ng-click="displayMovie()">Display Details</button>
+                    </div>
+
+                    <div class="col-md-2 mb-3">
+                        <button class="btn btn-success" ng-click="displayAllMovies()">Movie Club</button>
+                    </div>
+
+                    <div class="col-md-1 mb-3">
+
+                    </div>
+
+                </div>
+                
+                
+            </form>
+            <div class="text-center m-5 p-5">
+                <table ng-show="dispTable" class="d-flex justify-content-center align-items-center p-5 card custom-card table table-dark text-light">
+
+                    <tr>
+                        <th>Film ID</th>
+                        <th>Film Name</th>
+                        <th>Film Genre</th>
+                        <th>Film Studio</th>
+                        <th>Film Director</th>
+                        <th>Film Producer</th>
+                        <th>Film Lead Actor</th>
+                    </tr>
+                    <tr>
+                        <td>{{Table.FILM_ID}}</td>
+                        <td>{{Table.FILM_NAME}}</td>
+                        <td>{{Table.FILM_GENRE}}</td>
+                        <td>{{Table.FILM_STUDIO}}</td>
+                        <td>{{Table.FILM_DIRECTOR}}</td>
+                        <td>{{Table.FILM_PRODUCER}}</td>
+                        <td>{{Table.FILM_LEAD}}</td>
+                    </tr>
+                </table>
+            </div>
+
+            <div class="text-center m-5 p-5">
+                    <table ng-show="dispTableAll" class="d-flex justify-content-center align-items-center p-5 card custom-card table table-dark text-light">
+    
+                        <tr>
+                            <th>Film ID</th>
+                            <th>Film Name</th>
+                            <th>Film Genre</th>
+                            <th>Film Studio</th>
+                            <th>Film Director</th>
+                            <th>Film Producer</th>
+                            <th>Film Lead Actor</th>
+                        </tr>
+                        <tr ng-repeat = "row in TableAll">
+                            <td>{{row.FILM_ID}}</td>
+                            <td>{{row.FILM_NAME}}</td>
+                            <td>{{row.FILM_GENRE}}</td>
+                            <td>{{row.FILM_STUDIO}}</td>
+                            <td>{{row.FILM_DIRECTOR}}</td>
+                            <td>{{row.FILM_PRODUCER}}</td>
+                            <td>{{row.FILM_LEAD}}</td>
+                        </tr>
+                    </table>
+                </div>
+
+            <script>
+                   
+                
+            </script>
+
+    
+    </body>
+</html>
